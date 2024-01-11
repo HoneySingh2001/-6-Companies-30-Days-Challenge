@@ -1,0 +1,24 @@
+long long dp[4001][1001];
+int mod=1e9+7;
+int rec(int i,int endPos,int k){
+    if(k==0 && i==endPos){
+        return 1;
+    }
+    if( k==0)
+    return 0;
+    if(dp[i+1000][k]!=-1)
+    return dp[i+1000][k];
+     long long a=rec(i-1,endPos,k-1);
+    long long  b=rec(i+1,endPos,k-1);
+   return dp[i+1000][k]= (a+b)%mod;
+    
+}
+    int numberOfWays(int startPos, int endPos, int k) {
+        int ans=0;
+        for(int i=0;i<=4000;i++){
+            for(int j=0;j<=k;j++)
+            dp[i][j]=-1;
+        }
+         return rec(startPos,endPos,k)%mod;
+         
+    }
