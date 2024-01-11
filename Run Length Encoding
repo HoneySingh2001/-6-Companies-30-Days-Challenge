@@ -1,0 +1,16 @@
+string encode(string src)
+{     
+  int n=src.length();
+  string ans="";
+  int c=0;
+  for(int i=0;i<n;i++){
+      while(src[i]==src[i+1]){
+      i++;
+      c++;
+      }
+      ans+=src[i];
+      ans+=(c+1)+'0';
+      c=0;
+  }
+  return ans;
+}
