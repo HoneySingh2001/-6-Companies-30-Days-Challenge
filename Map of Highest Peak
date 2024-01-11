@@ -1,0 +1,37 @@
+vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+        int n=isWater.size();
+        int m=isWater[0].size();
+        vector<vector<int>> mat(n,vector<int> (m,-1));
+        queue<pair<int,int>> q;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(isWater[i][j]==1){
+                    mat[i][j]=0;
+                    q.push({i,j});
+                }
+            }
+        }
+        while(!q.empty()){
+            int x=q.front().first;
+            int y=q.front().second;
+            int a=mat[x][y];
+            if((x-1)>=0 && mat[x-1][y]==-1){
+                mat[x-1][y]=a+1;
+                q.push({x-1,y});
+                }
+                if((x+1)<n && mat[x+1][y]==-1){
+                mat[x+1][y]=a+1;
+                q.push({x+1,y});
+                }
+                if((y-1)>=0 && mat[x][y-1]==-1){
+                mat[x][y-1]=a+1;
+                q.push({x,y-1});
+                }
+                if((y+1)<m && mat[x][y+1]==-1){
+                mat[x][y+1]=a+1;
+                q.push({x,y+1});
+                }
+                q.pop();
+        }
+        return mat;
+    }
