@@ -1,0 +1,21 @@
+int rec(string s, unordered_map<string,int> &mp,int i,vector<int> &dp){
+    if(i>=s.length())
+    return 0;
+    if(dp[i]!=-1)
+    return dp[i];
+    int mini=s.length();
+    for(int j=i;j<s.length();j++){
+        string t=s.substr(i,j-i+1);
+        int curr=(mp.find(t)==mp.end())?t.length():0;
+        curr+=rec(s,mp,j+1,dp);
+        mini=min(mini,curr);
+    }
+    return dp[i]= mini;
+}
+    int minExtraChar(string s, vector<string>& dictionary) {
+        unordered_map<string,int> mp;
+        for(int i=0;i<dictionary.size();i++)
+        mp[dictionary[i]]++;
+        vector<int> dp(s.length(),-1);
+        return rec(s,mp,0,dp);
+    }
