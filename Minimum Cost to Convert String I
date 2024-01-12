@@ -1,0 +1,48 @@
+long long minimumCost(string source, string target, vector<char>& original, vector<char>& changed, vector<int>& cost) {
+        int n=original.size();
+        vector<vector<long long>> mat(26,vector<long long> (26,INT_MAX));
+        for(int i=0;i<26;i++){
+            for(int j=0;j<26;j++){
+                if(i==j)
+                mat[i][j]=0;
+
+            }
+        }
+        for(int i=0;i<original.size();i++){
+            int s=original[i]-'a';
+            int t=changed[i]-'a';
+            mat[s][t]=min(mat[s][t],(long long)cost[i]);
+        }
+        
+        for(int k=0;k<26;k++){
+            for(int i=0;i<26;i++){
+                for(int j=0;j<26;j++){
+                    mat[i][j]=min(mat[i][j],mat[i][k]+mat[k][j]);
+                }
+            }
+        }
+        int m=source.length();
+        int i=0;
+        int j=0;
+        long long ans=0;
+        while(i<m && j<m){
+            if(source[i]==target[j]){
+                i++;
+                j++;
+            }
+            else{
+
+                if(mat[source[i]-'a'][target[j]-'a']==INT_MAX)
+                return -1;
+                else{
+                ans+=(mat[source[i]-'a'][target[j]-'a']);
+                i++;
+                j++;
+                }
+            }
+
+        }
+        
+        return ans;
+    }
+};
