@@ -1,0 +1,34 @@
+class Solution {
+public:
+int rec(string s,string t,int maxCost,int n,int j,vector<int> &dp){
+    if(dp[j]!=-1)
+    return dp[j];
+    int i=j;
+    int cost=0;
+        int ans=0;
+    while(i<n){
+            int a=s[i]-'0';
+            int b=t[i]-'0';
+            cost+=abs(a-b);
+            if(cost<=maxCost){
+            ans++;
+            i++;
+            }
+            else
+            break;
+        }
+        return dp[j]= ans;
+
+}
+    int equalSubstring(string s, string t, int maxCost) {
+        int n=s.length();
+        int ans=0;
+        vector<int> dp(n,-1);
+        for(int i=0;i<n;i++){
+            ans=max(ans,rec(s,t,maxCost,n,i,dp));
+        }
+
+        return ans;
+        
+    }
+};
