@@ -1,0 +1,32 @@
+public:
+bool issubsequence(string &t,string &s){
+    
+    int j=0;
+    int n=s.length();
+    for(int i=0;i<n && j<t.length();){
+        if(s[i]==t[j]){
+            i++;
+            j++;
+        }
+        else
+        i++;
+    }
+   if(j==t.length())
+   return 1;
+   return 0;
+}
+    string findLongestWord(string s, vector<string>& dictionary) {
+        string t="";
+        int l=0;
+        for(string str:dictionary){
+            if(issubsequence(str,s)){
+                if(str.length()>t.length() || (str.length()==t.length() && t.compare(str)>0)){
+                    t=str;
+                    
+
+                }
+            }
+        }
+        return t;
+    }
+};
