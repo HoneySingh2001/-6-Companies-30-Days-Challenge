@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int longestString(int x, int y, int z) {
+        int a=x,b=y,c=z;
+        string ans="";
+        if(x==y){
+            while(x-- && y--){
+                ans+="AA";
+                ans+="BB";
+            }
+            while(z--){
+                ans=ans+"AB";
+            }
+            return ans.length();
+        }
+        if(x>y){
+            
+            int p=0;
+            while(p<=(y+1)){
+                ans+="AA";
+                p++;
+                if(b>0)
+                ans+="BB";
+                b=b-1;
+            }
+            
+        }
+        else{
+            int p=0;
+            while(p<=(x+1)){
+                ans+="BB";
+                p=p+1;
+                if(a>0)
+                ans+="BB";
+                a=a-1;
+            }
+        }
+        if(ans[0]=='A'){
+            while(c--)
+            ans=ans+"AB";
+        }
+        else{
+            while(c--)
+            ans+="AB";
+        }
+        return ans.length()-2;
+    }
+};
